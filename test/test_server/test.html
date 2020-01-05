@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  var auth_var = "REQUEST_AUTH_TOKEN";
+  var url = new URL(window.location.href);
+  var auth = url.searchParams.get(auth_var);
+  var auth_data = JSON.stringify({REQUEST_AUTH_TOKEN: auth});
+
+  $("button").click(function(){
+    $.ajax({
+        type: "POST",
+        url: "https://mhjhnc1h1k.execute-api.us-east-1.amazonaws.com/default/IotPubTest",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: auth_data,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(result){
+            $("#div1").html(result);
+        },
+        failure: function(errMsg) {
+            $("#div1").html('error: ' + errMsg);
+        }
+    });
+  });
+
+
+
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+<button>Get External Content</button>
+
+</body>
+</html>
