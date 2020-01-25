@@ -1,1 +1,1 @@
-python cors_server.py
+python -m http.server
